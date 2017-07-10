@@ -51,7 +51,12 @@
     "koa-bodyparser": "*",
     "koa-methodoverride": "*",
     "dotenv": "*",
-    "sqlite3": "*"
+    "sqlite3": "*",
+    "babel-loader": "*",
+    "css-loader": "*",
+    "jquery": "*",
+    "jquery-ujs": "*",
+    "style-loader": "*"
   },
   "devDependencies": {
     "babel-plugin-istanbul": "next",

@@ -2,17 +2,23 @@
   "name": "test-project-infinite",
   "version": "0.0.0",
   "description": "nope",
-  "bin": "dist/bin/test-project",
+  "main": "dist/index.js",
+  "bin": {
+    "test-project": "dist/bin/test-project"
+  },
   "scripts": {
     "babel-node": "babel-node",
     "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
-    "prepublish": "npm run build",
     "eslint": "eslint src __tests__/*.*",
-    "test": "DEBUG='test-project' jest --coverage"
+    "test": "DEBUG='test-project' jest --coverage",
+    "start": "node dist/index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/eepforwe/test-project.git"
+  },
+  "engines": {
+    "node": "7.10.0"
   },
   "author": "nopeman",
   "license": "ISC",
@@ -21,13 +27,23 @@
   },
   "homepage": "https://github.com/eepforwe/test-project#readme",
   "dependencies": {
-    "debug": "*"
-  },
-  "devDependencies": {
+    "debug": "*",
     "babel-cli": "*",
     "babel-core": "*",
     "babel-preset-env": "*",
     "babel-preset-stage-0": "*",
+    "babel-polyfill": "*",
+    "rollbar": "*",
+    "nodemon": "*",
+    "bootstrap": "^4.0.0-alpha.6",
+    "koa": "*",
+    "koa-router": "*",
+    "koa-pug": "*",
+    "koa-webpack": "*",
+    "webpack": "*",
+    "gulp": "*"
+  },
+  "devDependencies": {
     "babel-plugin-istanbul": "next",
     "eslint": "3.19.0",
     "eslint-config-airbnb-base": "*",
@@ -35,7 +51,8 @@
     "babel-eslint": "*",
     "jest": "*",
     "jest-cli": "*",
-    "debug": "*"
+    "supertest": "*",
+    "jest-supertest-matchers": "*"
   },
   "jest": {
     "transformIgnorePatterns": [

@@ -2,7 +2,7 @@ install:
 	npm install
 
 start:
-	npm run nodemon -- --exec babel-node 'src/bin/index.js'
+	DEBUG="application:*" npm run nodemon -- --watch src --ext '.js,.pug' --exec npm run gulp -- server
 
 pack:
 	npm run webpack --display-error-details

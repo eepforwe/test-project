@@ -4,7 +4,7 @@
   "description": "nope",
   "main": "dist/index.js",
   "bin": {
-    "test-project": "src/bin/index.js"
+    "test-project": "dist/bin/index.js"
   },
   "scripts": {
     "babel-node": "babel-node",

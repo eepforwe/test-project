@@ -1,4 +1,3 @@
-import 'babel-polyfill';
 import Koa from 'koa';
 import Router from 'koa-router';
 import Pug from 'koa-pug';
@@ -30,7 +29,7 @@ export default () => {
     baseDir: path.join(__dirname, 'views'),
   });
   pug.use(app);
-  app.use(rollbar.errorHandler(process.env.ROLLBAR_TOKEN));
+  // app.use(rollbar.errorHandler(process.env.ROLLBAR_TOKEN));
 
   return app;
 };

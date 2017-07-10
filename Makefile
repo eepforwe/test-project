@@ -24,3 +24,6 @@ deploy:
 	git add .
 	git commit -am 'next'
 	git push heroku master
+
+hlogs:
+	heroku logs --tail

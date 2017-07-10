@@ -11,7 +11,9 @@
     "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
     "eslint": "eslint src __tests__/*.*",
     "test": "DEBUG='test-project' jest --coverage",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "webpack": "webpack",
+    "nodemon": "nodemon"
   },
   "repository": {
     "type": "git",
@@ -42,7 +44,9 @@
     "koa-webpack": "*",
     "webpack": "*",
     "gulp": "*",
-    "koa-static": "*"
+    "koa-static": "*",
+    "koa-logger": "*",
+    "koa-bodyparser": "*"
   },
   "devDependencies": {
     "babel-plugin-istanbul": "next",

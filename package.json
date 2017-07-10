@@ -4,7 +4,7 @@
   "description": "nope",
   "main": "dist/index.js",
   "bin": {
-    "test-project": "dist/bin/test-project"
+    "test-project": "dist/bin/index.js"
   },
   "scripts": {
     "babel-node": "babel-node",
@@ -35,6 +35,7 @@
     "babel-preset-env": "*",
     "babel-preset-stage-0": "*",
     "babel-polyfill": "*",
+    "babel-plugin-transform-runtime": "*",
     "rollbar": "*",
     "nodemon": "*",
     "bootstrap": "^4.0.0-alpha.6",

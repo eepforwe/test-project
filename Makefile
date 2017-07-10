@@ -2,7 +2,7 @@ install:
 	npm install
 
 start:
-	npm run nodemon -- --exec babel-node 'src/index.js'
+	npm run nodemon -- --exec babel-node 'src/bin/index.js'
 
 pack:
 	npm run webpack --display-error-details

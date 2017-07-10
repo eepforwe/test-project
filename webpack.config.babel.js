@@ -6,7 +6,7 @@ export default () => ({
   },
   output: {
     path: path.join(__dirname, 'public', 'assets'),
-    filename: 'index.js',
+    filename: 'application.js',
     publicPath: '/assets/',
   },
 });

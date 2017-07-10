@@ -1,0 +1,50 @@
+{
+  "name": "test-project-infinite",
+  "version": "0.0.0",
+  "description": "nope",
+  "bin": "dist/bin/test-project",
+  "scripts": {
+    "babel-node": "babel-node",
+    "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
+    "prepublish": "npm run build",
+    "eslint": "eslint src __tests__/*.*",
+    "test": "DEBUG='test-project' jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eepforwe/test-project.git"
+  },
+  "author": "nopeman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eepforwe/test-project/issues"
+  },
+  "homepage": "https://github.com/eepforwe/test-project#readme",
+  "dependencies": {
+    "debug": "*"
+  },
+  "devDependencies": {
+    "babel-cli": "*",
+    "babel-core": "*",
+    "babel-preset-env": "*",
+    "babel-preset-stage-0": "*",
+    "babel-plugin-istanbul": "next",
+    "eslint": "3.19.0",
+    "eslint-config-airbnb-base": "*",
+    "eslint-plugin-import": "*",
+    "babel-eslint": "*",
+    "jest": "*",
+    "jest-cli": "*",
+    "debug": "*"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "/node_modules/",
+      "/__fixtures__/"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "testPathIgnorePatterns": []
+  }
+}

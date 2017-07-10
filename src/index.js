@@ -8,6 +8,7 @@ import koaLogger from 'koa-logger';
 import middleware from 'koa-webpack';
 import rollbar from 'rollbar';
 import path from 'path';
+import _ from 'lodash';
 import getWebpackConfig from '../webpack.config.babel';
 import methodoverride from 'koa-methodoverride';
 import addRoutes from './controllers';
@@ -33,6 +34,10 @@ export default () => {
   const pug = new Pug({
     viewPath: path.join(__dirname, 'views'),
     baseDir: path.join(__dirname, 'views'),
+    debug: true,
+    pretty: true,
+    compileDebug: true,
+    locals: [],
     app,
   });
   pug.use(app);

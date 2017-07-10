@@ -5,7 +5,7 @@ start:
 	DEBUG="application:*" npm run nodemon -- --watch src --ext '.js,.pug' --exec npm run gulp -- server
 
 pack:
-	npm run webpack --display-error-details
+	npm run build
 
 publish:
 	npm publish

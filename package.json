@@ -48,7 +48,10 @@
     "gulp": "*",
     "koa-static": "*",
     "koa-logger": "*",
-    "koa-bodyparser": "*"
+    "koa-bodyparser": "*",
+    "koa-methodoverride": "*",
+    "dotenv": "*",
+    "sqlite3": "*"
   },
   "devDependencies": {
     "babel-plugin-istanbul": "next",

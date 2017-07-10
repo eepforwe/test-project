@@ -41,7 +41,8 @@
     "koa-pug": "*",
     "koa-webpack": "*",
     "webpack": "*",
-    "gulp": "*"
+    "gulp": "*",
+    "koa-static": "*"
   },
   "devDependencies": {
     "babel-plugin-istanbul": "next",

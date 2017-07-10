@@ -18,3 +18,9 @@ test:
 
 build:
 	npm run build
+
+deploy:
+	make build
+	git add .
+	git commit -am 'next'
+	git push heroku master

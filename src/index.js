@@ -26,6 +26,10 @@ export default () => {
   app.use(router.allowedMethods());
   app.use(router.routes());
 
+  app.use(middleware({
+    config: getWebpackConfig(),
+  }));
+
   const pug = new Pug({
     viewPath: path.join(__dirname, 'views'),
     baseDir: path.join(__dirname, 'views'),

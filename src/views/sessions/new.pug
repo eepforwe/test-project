@@ -1,0 +1,8 @@
+extends ../layouts/application.pug
+
+block content
+    form(action='/session' method='post')
+        h2.text-center Authorization
+            +input(f, 'email')
+            +input(f, 'password', { as: 'password' })
+            +button(f, 'Log In')

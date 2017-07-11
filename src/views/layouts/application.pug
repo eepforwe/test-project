@@ -1,0 +1,41 @@
+include ../mixins/forms
+
+doctype html
+html(lang='en')
+    head
+        title TEST PROJECT
+        script(src='/assets/vendor.js')
+        script(src='/assets/application.js')
+    body
+        nav.navbar.navbar-toggleable-md.navbar-inverse.bg-inverse
+            a.navbar-brand(href='/')
+            .fa.fa-tasks.fa-3x(aria-hidden=true)
+            h1.navbar-text TP
+
+            if isSignedIn()
+                a.navbar-link(href='/users')
+                i.mr-1.fa.fa-users.fa-3x.text-center(aria-hidden=true)
+                t.navbar-text Users
+
+                a.navbar-link(href='/tasks')
+                i.mr-1.fa.fa-bars.fa-3x(aria-hidden=true)
+                t.navbar-text Tasks
+
+                a.navbar-link(href='/')
+                i.mr-1.fa.fa-question-circle.fa-3x(aria-hidden=true)
+                t.navbar-text Help
+
+                .collapse.navbar-collapse.justify-content-end
+                    nav.btn-group
+                        a.btn.btn-outline-danger.btn-md(href='/session' rel='nofollow' data-method='delete') Log out
+
+            else
+                .collapse.navbar-collapse.justify-content-end
+                    nav.btn-group
+                        a.btn.btn-outline-danger.btn-md(href='/users/new') Sign Up
+                        a.btn.btn-outline-danger.btn-md(href='/session/new') Log In
+        .container
+            - const msg = flash.get()
+            if msg
+                .alert.alert-info.m-3= msg
+        block content

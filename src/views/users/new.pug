@@ -1,0 +1,10 @@
+extends ../layouts/application
+
+block content
+    form(action='/users/new' method='post')
+        h2.text-center Registration
+        +input(f, 'email')
+        +input(f, 'firstName')
+        +input(f, 'lastName')
+        +input(f, 'password', { as: 'password' })
+        +button(f, 'Sign Up')

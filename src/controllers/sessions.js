@@ -5,7 +5,7 @@ export default (router, { User }) => {
   router
     .get('newSession', '/session/new', async (ctx) => {
       const data = {};
-      ctx.render('/session/new', { f: buildFormObj(data) });
+      ctx.render('sessions/new', { f: buildFormObj(data) });
     })
     .post('session', '/session', async (ctx) => {
       const { email, password } = ctx.request.body.form;
@@ -17,10 +17,10 @@ export default (router, { User }) => {
       if (user && user.password_hash === encrypt(password)) {
         ctx.session.userId = user.id;
         ctx.redirect(router.url('tasks'));
-      } else {
-        ctx.flash.set('email or password wrong');
-        ctx.render('/session/new', { f: buildFormObj(email) });
+        return;
       }
+      ctx.flash.set('email or password were wrong');
+      ctx.render('sessions/new', { f: buildFormObj({ email }) });
     })
     .delete('session', '/session', async (ctx) => {
       ctx.session = {};

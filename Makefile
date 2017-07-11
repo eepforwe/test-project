@@ -28,3 +28,6 @@ deploy:
 
 hlogs:
 	heroku logs --tail
+
+init:
+	npm run gulp init

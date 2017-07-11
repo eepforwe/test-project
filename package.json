@@ -60,7 +60,10 @@
     "jquery": "*",
     "jquery-ujs": "*",
     "style-loader": "*",
-    "pg": "*"
+    "pg": "*",
+    "koa-flash-simple": "*",
+    "koa-generic-session": "*",
+    "sequelize": "*"
   },
   "devDependencies": {
     "babel-plugin-istanbul": "next",

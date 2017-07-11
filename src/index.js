@@ -8,22 +8,37 @@ import koaLogger from 'koa-logger';
 import middleware from 'koa-webpack';
 import rollbar from 'rollbar';
 import path from 'path';
+import session from 'koa-generic-session';
+import flash from 'koa-flash-simple';
 import _ from 'lodash';
+import methodOverride from 'koa-methodoverride';
 import getWebpackConfig from '../webpack.config.babel';
-import methodoverride from 'koa-methodoverride';
 import addRoutes from './controllers';
+import container from './container';
 
 export default () => {
   const app = new Koa();
   const router = new Router();
 
-  app.use(methodoverride());
+  app.use(methodOverride());
 
   app.use(bodyParser());
   app.use(koaLogger());
   app.use(serve(path.join(__dirname, '..', 'public')));
+  app.keys = ['some secret durr'];
+  app.use(session(app));
+  app.use(flash());
 
-  addRoutes(router);
+  app.use(async (ctx, next) => {
+    ctx.state = {
+      flash: ctx.flash,
+      isSignedIn: () => ctx.session.userId !== undefined,
+      signedId: () => ctx.session.userId,
+    };
+    await next();
+  });
+
+  addRoutes(router, container);
   app.use(router.allowedMethods());
   app.use(router.routes());
 
@@ -38,7 +53,10 @@ export default () => {
     pretty: true,
     compileDebug: true,
     locals: [],
-    app,
+    helperPath: [
+      { _ },
+      { urlFor: (...args) => router.url(...args) },
+    ],
   });
   pug.use(app);
   // app.use(rollbar.errorHandler(process.env.ROLLBAR_TOKEN));

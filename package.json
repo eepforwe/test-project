@@ -63,7 +63,8 @@
     "pg": "*",
     "koa-flash-simple": "*",
     "koa-generic-session": "*",
-    "sequelize": "*"
+    "sequelize": "*",
+    "gulp-util": "*"
   },
   "devDependencies": {
     "babel-plugin-istanbul": "next",

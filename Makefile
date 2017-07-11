@@ -31,3 +31,6 @@ hlogs:
 
 init:
 	npm run gulp init
+
+console:
+	npm run gulp console

@@ -1,9 +1,9 @@
 import url from 'url';
 import rollbar from 'rollbar';
 import buildFormObj from '../lib/formObjectBuilder';
-import { getData, getParams } from '../lib/getData';
+import { getData, getParams } from '../lib/tools';
 
-export default (router, { User, Task, Status, Tag, Comment }) => {
+export default (router, { User, Task, Status, Tag }) => {
   router
     .get('task form', '/tasks/new', async (ctx) => {
       const task = Task.build();
@@ -14,29 +14,34 @@ export default (router, { User, Task, Status, Tag, Comment }) => {
       const { query } = url.parse(ctx.request.url, true);
       const where = getParams(query, ctx);
       const filteredTasks = await Task.findAll({ where });
-      const tasks = await Promise.all(
-        filteredTasks.map(async task => getData(task)));
+      const tasks = await Promise.all(filteredTasks.map(async task => getData(task)));
+      const tags = await Tag.findAll();
       const statuses = await Status.findAll();
-      ctx.render('tasks/index', { tasks, statuses });
+      ctx.render('tasks/index', { tasks, statuses, tags });
     })
     .get('task', '/tasks/:id', async (ctx) => {
-      const id = Number(ctx.params.id);
-      const taskPromise = await Task.findById(id);
+      const taskId = Number(ctx.params.id);
+      const userId = Number(ctx.session.userId);
+      const user = await User.findById(userId);
+      const taskPromise = await Task.findById(taskId);
       const task = await getData(taskPromise);
+      const tags = task.tags;
       const statuses = await Status.findAll();
-      ctx.render('tasks/task', { f: buildFormObj(task), task, statuses });
+      const comments = task.comments;
+      ctx.render('tasks/task',
+        { f: buildFormObj(task), user, task, statuses, tags, comments });
     })
     .post('new task', '/tasks/new', async (ctx) => {
       const form = ctx.request.body.form;
       form.creatorId = ctx.session.userId;
       const users = await User.findAll();
-      //  const tags = form.Tags.split(' ');
+      const tags = form.Tags.split(' ');
       const task = Task.build(form);
       try {
         await task.save();
-        // tags.map(tag => Tag.findOne({ where: { name: tag } })
-        //   .then(async result => (result ? task.addTag(result) :
-        //   task.createTag({ name: tag }))));
+        tags.map(tag => Tag.findOne({ where: { name: tag } })
+          .then(async result => (result ? task.addTag(result) :
+            task.createTag({ name: tag }))));
         ctx.flash.set('Task has been created');
         ctx.redirect(router.url('tasks'));
       } catch (e) {

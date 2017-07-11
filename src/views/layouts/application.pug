@@ -1,4 +1,4 @@
-include ../mixins/forms.pug
+include /mixins/forms.pug
 
 doctype html
 html(lang="en")
@@ -6,14 +6,17 @@ html(lang="en")
         title Task Manager
         script(src='/assets/vendor.js')
         script(src='/assets/application.js')
-    body
+        script(src='https://use.fontawesome.com/9e77b4a3f0.js')
+        link(rel='shortcut icon' type="image/x-icon" href='/assets/favicon.ico')
+
+    body.row-10
         nav.navbar.navbar-toggleable-right.navbar-inverse.bg-inverse
             .conteiner
                 .row.align-items-center
                     .col-4
                         a.navbar-brand(href='/')
-                            .fa.fa-ravelry.fa-3x(aria-hidden='true')
-                            h1.navbar-text TM
+                            .fa.fa-ravelry.fa-4x(aria-hidden='true')
+                            h1.navbar-text Task Manager
 
                     if isSignedIn()
                         .col-4
@@ -24,9 +27,6 @@ html(lang="en")
                                 a.navbar-link.ml-2(href='/tasks')
                                     i.mr-1.fa.fa-list.fa-3x(aria-hidden='true')
                                     span.text-center Tasks
-                                a.navbar-link.ml-2(href='/')
-                                    i.mr-1.fa.fa-question-circle.fa-3x(aria-hidden='true')
-                                    span.text-center Help
 
                         .col-4
                             .d-flex.justify-content-end
@@ -39,8 +39,8 @@ html(lang="en")
                                 nav.btn-group
                                     a.btn.btn-outline-primary(href="/users/new") Sign Up
                                     a.btn.btn-outline-success(href="/session/new") Log In
-            .container
-                - const msg = flash.get()
-                if msg
-                    .alert.alert-info.m-3= msg
+        .container
+            - const msg = flash.get()
+            if msg
+                .alert.alert-info.m-3= msg
         block content

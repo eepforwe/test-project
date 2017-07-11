@@ -1,8 +1,8 @@
-extends ../layouts/application.pug
+extends /layouts/application.pug
 
 block content
-    h3.text-center.mt-3 Create new task
-    .mt-3.form-group.col-lg-4.mx-auto
+    h2.text-center.mt-3 Create new task
+    .form-group.col-lg-4.mt-3.mx-auto
         form(action='/tasks/new' method='post')
             +input(f, 'name', 'fa fa-ticket fa-fw')
             +select(f, 'assignedToId','fa fa-user-circle-o fa-fw', users)

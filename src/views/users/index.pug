@@ -1,11 +1,11 @@
-extends ../layouts/application.pug
+extends /layouts/application.pug
 
 block content
     if isSignedIn()
         .row.justify-content-center.mt-4
             .col-lg-4
                 table.table.table-stripped
-                    h2.text-center Users
+                    h2.text-center.mb-4 Users
                         tr
                             th.text-center ID
                             th.text-center Full Name
@@ -15,6 +15,6 @@ block content
                         each user in users
                             tr
                                 td.text-center= user.id
-                                td= user.fullName || '-'
+                                td.text-center= user.fullName || '-'
                                 td.text-center= user.email
-                                td= user.createdAt
+                                td.text-center= user.createdAt

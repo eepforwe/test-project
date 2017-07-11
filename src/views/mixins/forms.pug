@@ -9,17 +9,10 @@ mixin input(f, property, image, options = { as: 'text' })
     if f.errors[property]
         .form-control-feedback= f.errors[property].map(({ message }) => message).join('. ')
 
-//- mixin input(f, property, options = { as: 'text' })
-//-   - const value = f.object[property] === undefined ? '' : f.object[property]
-//-     .form-group(class=(f.errors[property] && 'has-danger'))
-//-       input(name=getInputName(f, property) class='form-control' type=options['as'] value=`${value}` placeholder=`${property}`)
-//-       if f.errors[property]
-//-         .form-control-feedback= f.errors[property].map(({ message }) => message).join('. ')
-
 mixin textarea(f, property)
     - const value = f.object[property] === undefined ? '' : f.object[property]
     form-group(class=(f.errors[property] && 'has-danger'))
-        textarea(name=getInputName(f, property) class='form-control' type='text' value=`${value}` placeholder=`${property}` rows='5' maxlength="140")
+        textarea(name=getInputName(f, property) class='form-control' type='text' value=`${value}` placeholder=`${property}` rows='4' maxlength="255")
         if f.errors[property]
             .form-control-feedback= f.errors[property].map(({ message }) => message).join('. ')
 

@@ -1,3 +1,5 @@
+/* eslint no-param-reassign: "off"*/
+
 import buildFormObj from '../lib/formObjectBuilder';
 
 export default (router, { User }) => {
@@ -18,13 +20,13 @@ export default (router, { User }) => {
         ctx.flash.set('User has been created');
         ctx.redirect(router.url('newSession'));
       } catch (e) {
-        ctx.render('/users/new', { f: buildFormObj(user, e) });
+        ctx.render('users/new', { f: buildFormObj(user, e) });
       }
     })
     .get('profile', '/users/:id/profile', async (ctx) => {
       const id = Number(ctx.params.id);
       const user = await User.findById(id);
-      ctx.render('/users/profile', { user });
+      ctx.render('users/profile', { user });
     })
     .delete('delete user', '/users/:id', async (ctx) => {
       const userId = Number(ctx.params.id);

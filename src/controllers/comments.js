@@ -12,7 +12,7 @@ export default (router, { Comment }) => {
         ctx.flash.set('Comment has been created');
         ctx.redirect(`/tasks/${form.TaskId}`);
       } catch (e) {
-        ctx.render('users/new', { f: buildFormObj(comment, e) });
+        ctx.redirect(`/tasks/${form.TaskId}`, { f: buildFormObj(comment, e) });
       }
     });
 };

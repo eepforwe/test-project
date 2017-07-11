@@ -75,7 +75,9 @@
     "jest": "*",
     "jest-cli": "*",
     "supertest": "*",
-    "jest-supertest-matchers": "*"
+    "jest-supertest-matchers": "*",
+    "flow-bin": "*",
+    "flow-typed": "*"
   },
   "jest": {
     "transformIgnorePatterns": [

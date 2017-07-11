@@ -1,41 +1,41 @@
-extends ../layouts/application.pug
+extends /layouts/application.pug
 
 block content
-    h3.text-center.mt-3 Card
-    .mt-3.form-group.col-lg-4.mx-auto
+    h2.text-center.mt-3 Task
+    .form-group.col-lg-4.mt-3.mx-auto
         table.table.table-stripped
             tbody
                 tr
                     th
                         | ID
-                    td= task.id
+                    td.text-center= task.id
                 tr
                     th
                         | Name
-                    td= task.name
+                    td.text-center= task.name
                 tr
                     th
                         | Status
-                    td= task.status
+                    td.text-center= task.status
                 tr
                     th
                         | Creator
-                    td= task.creator
+                    td.text-center= task.creator
                 tr
                     th
                         | Assigned To
-                    td= task.assignedTo
+                    td.text-center= task.assignedTo
                 tr
                     th
                         | Description
-                    td= task.description
+                    td.text-center= task.description
                 tr
                     th
                         | Tags
-                    td
+                    td.text-center
                         form.form-inline(action='/tasks')
                             each tag in tags
-                                a(value='tagId') tag.name
+                                a.mr-2(href=`/tags/${tag.id}`)= tag.name
 
         form.form-inline.mx-auto.justify-content-center(action=`/tasks/${task.id}`, method='post')
             - const value = f.object[property] === undefined ? '' : f.object[property]
@@ -46,9 +46,31 @@ block content
                 input(type='hidden' name='_method' value='PATCH')
                 input(type='hidden' name='taskId' value= task.id)
                 button(class='btn btn-primary') Change status
-        //- form.mt-3(action='/tasks/:id' method='post')
-          +button('Save')
-        
+
+    div.col-lg-8.justify-content-start.offset-md-2
+        form(action=`/tasks/${task.id}/comments/new` method='post' )
+            label(for='Comment') Comment
+            +textarea(f, 'content')
+
+            button(type='submit' class='btn btn-warning')
+                i.fa.fa-comment-o.fa-1x(aria-hidden='true')
+                    span.ml-2 Add comment
+
+        table.table.table-stripped.mt-4
+            thead
+                tr
+                    th.text-center Message
+                    th.text-center Created by (id)
+                    th.text-center Created At
+            tbody
+                each comment in comments
+                    tr
+                        td.text-center= comment.content
+                        td.text-center= `${user.fullName} (${user.id})`
+                        td.text-center= comment.createdAt
+
+
+
         
     
       

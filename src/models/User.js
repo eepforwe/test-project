@@ -57,5 +57,5 @@ export default connect => connect.define('User', {
       return `${this.firstName} ${this.lastName}`;
     },
   },
-  freezeTableName: true,
+  tableName: 'User',
 });

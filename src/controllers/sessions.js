@@ -1,3 +1,5 @@
+/* eslint no-param-reassign: "off"*/
+
 import buildFormObj from '../lib/formObjectBuilder';
 import encrypt from '../lib/security';
 
@@ -16,11 +18,12 @@ export default (router, { User }) => {
       });
       if (user && user.password_hash === encrypt(password)) {
         ctx.session.userId = user.id;
+        ctx.flash.set('Success Authorization');
         ctx.redirect(router.url('tasks'));
         return;
       }
       ctx.flash.set('email or password were wrong');
-      ctx.render('sessions/new', { f: buildFormObj({ email }) });
+      ctx.redirect('session/new', { f: buildFormObj({ email }) });
     })
     .delete('session', '/session', async (ctx) => {
       ctx.session = {};

@@ -36,6 +36,14 @@ export default connect => connect.define('Task', {
       return status.dataValues.name;
     },
   },
-  freezeTableName: true,
+
+  TagId: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
+  },
+  tableName: 'Task',
   timestamps: false,
 });

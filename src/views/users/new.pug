@@ -1,10 +1,11 @@
-extends ../layouts/application
+extends /layouts/application.pug
 
 block content
-    form(action='/users/new' method='post')
-        h2.text-center Registration
-        +input(f, 'email')
-        +input(f, 'firstName')
-        +input(f, 'lastName')
-        +input(f, 'password', { as: 'password' })
-        +button(f, 'Sign Up')
+    h3.text-center.mt-3 Registration
+    .mt-3.form-group.col-lg-3.mx-auto
+        form(action='/users/new' method='post')
+            +input(f, 'email', 'fa fa-envelope-o fa-fw')
+            +input(f, 'password', 'fa fa-key fa-fw', { as: 'password' })
+            +input(f, 'firstName','fa fa-address-book-o fa-fw' )
+            +input(f, 'lastName', 'fa fa-address-book-o fa-fw')
+            +button(f, 'Sign up')

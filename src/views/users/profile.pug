@@ -1,0 +1,25 @@
+extends /layouts/application.pug
+
+block content
+    if isSignedIn()
+        .row.justify-content-center.align-items-center
+            .fa.fa-user-o.fa-5x
+            .col-lg-4
+                table.table
+                    thead.thead-bordered
+                        tr
+                            th ID
+                            th Email
+                            th First Name
+                            th Last Name
+
+                    tbody
+                        tr
+                            th(scope='row')= user.id
+                            td= user.email
+                            td= user.firstName
+                            td= user.lastName
+
+            form(action=`/users/${user.id}` method='post')
+                .col-lg-4
+                    button.btn.btn-danger(type='submit' name='_method' value='DELETE') Delete account

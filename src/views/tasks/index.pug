@@ -1,4 +1,31 @@
-extends ../layouts/application
+extends ../layouts/application.pug
 
 block content
-    h2 Tasks
+    if isSignedIn()
+        a.btn.btn-outline-success(href="/tasks/new") New Task
+
+        .row.justify-content-center.mt-4
+            .col-lg-4
+                table.table.table-stripped
+                    h2.text-center Tasks
+                        tr
+                            th ID
+                            th Name
+                            th Status
+                            th AssignedTo
+                            th Tags
+                            th Creator
+                            th Description
+                    tbody
+                        each task in tasks
+                            tr
+                                td= task.id
+                                td= task.name
+                                td= task.status
+                                td= task.assignedTo
+                                td= task.tags
+                                td= task.creator
+                                td= task.description
+                                td
+                                    a.btn.btn-danger(href=`/task/${task.id}`, aria-label='Delete')
+                                        i.fa.fa-trash-o(aria-hidden='true')

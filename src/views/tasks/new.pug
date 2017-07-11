@@ -1,0 +1,12 @@
+extends ../layouts/application.pug
+
+block content
+    if isSignedIn()
+        form.mt-3(action='/tasks/new' method='post')
+            h2.text-center Create new task
+            +input(f, 'Name')
+            +select(f, 'assignedTo', users)
+            +input(f, 'Tags')
+            +fieldset(f, `${user.fullName}`)
+            +textarea(f, 'Description')
+            +button(f, 'Create')

@@ -1,17 +1,18 @@
-extends ../layouts/application
+extends ../layouts/application.pug
 
 block content
-    .row.justify-content-center
-        .col-lg-6
-            table.table.table-striped
-                thead
-                    tr
-                        th Full Name
-                        th Email
-                        th Created At
-                tbody
-                    each user in users
+    if isSignedIn()
+        .row.justify-content-center.mt-4
+            .col-lg-4
+                table.table.table-stripped
+                    h2.text-center Users
                         tr
-                            td= user.fullName
-                            td= user.email
-                            td= user.createdAt
+                            th Full Name
+                            th Email
+                            th Created At
+                    tbody
+                        each user in users
+                            tr
+                                td= user.fullName || '-'
+                                td= user.email
+                                td= user.createdAt

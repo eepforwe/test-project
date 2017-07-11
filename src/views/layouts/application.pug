@@ -9,7 +9,7 @@ html(lang='en')
     body
         nav.navbar.navbar-toggleable-md.navbar-inverse.bg-inverse
             a.navbar-brand(href='/')
-            .fa.fa-tasks.fa-3x(aria-hidden=true)
+            .fa.fa-ravelry.fa-4x(aria-hidden=true)
             h1.navbar-text TP
 
             if isSignedIn()
@@ -18,7 +18,7 @@ html(lang='en')
                 t.navbar-text Users
 
                 a.navbar-link(href='/tasks')
-                i.mr-1.fa.fa-bars.fa-3x(aria-hidden=true)
+                i.mr-1.fa.fa-list.fa-3x(aria-hidden=true)
                 t.navbar-text Tasks
 
                 a.navbar-link(href='/')
@@ -27,13 +27,14 @@ html(lang='en')
 
                 .collapse.navbar-collapse.justify-content-end
                     nav.btn-group
+                        a.btn.btn-outline-primary.btn-md(href=`/users/${signedId()}/profile`) Account
                         a.btn.btn-outline-danger.btn-md(href='/session' rel='nofollow' data-method='delete') Log out
 
             else
                 .collapse.navbar-collapse.justify-content-end
                     nav.btn-group
-                        a.btn.btn-outline-danger.btn-md(href='/users/new') Sign Up
-                        a.btn.btn-outline-danger.btn-md(href='/session/new') Log In
+                        a.btn.btn-outline-danger(href='/users/new') Sign Up
+                        a.btn.btn-outline-danger(href='/session/new') Log In
         .container
             - const msg = flash.get()
             if msg

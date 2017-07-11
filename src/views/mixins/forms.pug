@@ -1,13 +1,38 @@
 - const getInputName = (f, property) => `${f.name}[${property}]`
 
-mixin input(f, property, options = { as: 'text' })
-  - const value = f.object[property] === undefined ? '' : f.object[property]
-    .mt-3.form-group.col-lg-4.mx-auto(class=(f.errors[property] && 'has-danger'))
-      input(name=getInputName(f, property) class='form-control' type=options['as'] value=`${value}` placeholder = `${property}`)
-      if f.errors[property]
-        .form-control-feedback= f.errrors[property].map(({ message }) => message).join('. ')
+mixin input(f, property, image, options = { as: 'text' })
+    - const value = f.object[property] === undefined ? '' : f.object[property]
+    .input-group.margin-bottom-sm(class=(f.errors[property] && 'has-danger'))
+        span.input-group-addon
+            i(aria-hidden='true' class=`${image}`)
+        input(name=getInputName(f, property) class='form-control' type=options['as'] value=`${value}` placeholder=`${property}`)
+    if f.errors[property]
+        .form-control-feedback= f.errors[property].map(({ message }) => message).join('. ')
 
-mixin button(f, value, type='submit')
-  .col-lg-4.mx-auto
-      .form-group
-          input(class='btn btn-outline-success btn-block' type=`${type}` value=`${value}`)
+mixin textarea(f, property)
+    - const value = f.object[property] === undefined ? '' : f.object[property]
+    .mt-3.form-group.col-lg-3.mx-auto(class=(f.errors[property] && 'has-danger'))
+        textarea(name=getInputName(f, property) class='form-control' type='text' value=`${value}` placeholder=`${property}` rows='5' maxlength="140")
+        if f.errors[property]
+            .form-control-feedback= f.errors[property].map(({ message }) => message).join('. ')
+
+mixin fieldset(f, property)
+    - const value = f.object[property] === undefined ? '' : f.object[property]
+    .mt-3.form-group.col-lg-3.mx-auto(class=(f.errors[property] && 'has-danger'))
+        fieldset(disabled='')
+            input(name=getInputName(f, property) class='form-control' type='text' value=`${value}` placeholder=`${property}`)
+        if f.errors[property]
+            .form-control-feedback= f.errors[property].map(({ message }) => message).join('. ')
+
+mixin select(f, property, users)
+    - const value = f.object[property] === undefined ? '' : f.object[property]
+    .mt-3.form-group.col-lg-3.mx-auto(class=(f.errors[property] && 'has-danger'))
+        select(name=getInputName(f, property) class='form-control' value=`${value}`)
+            each user in users
+                option(value= user.id)= `${user.firstName} ${user.lastName}`
+        if f.errors[property]
+            .form-control-feedback= f.errors[property].map(({ message }) => message).join('. ')
+
+mixin button(f, value, type = 'submit')
+    .form-group.mt-3
+        input(class='btn btn-outline-success btn-block' type=`${type}` value=`${value}`)

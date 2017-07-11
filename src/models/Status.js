@@ -9,4 +9,5 @@ export default connect => connect.define('Status', {
   },
 }, {
   freezeTableName: true,
+  timestamps: false,
 });

@@ -14,9 +14,9 @@ export default (router, { User }) => {
           email,
         },
       });
-      if (user && user.passwordDigest === encrypt(password)) {
+      if (user && user.password_hash === encrypt(password)) {
         ctx.session.userId = user.id;
-        ctx.redirect('/');
+        ctx.redirect(router.url('tasks'));
       } else {
         ctx.flash.set('email or password wrong');
         ctx.render('/session/new', { f: buildFormObj(email) });
@@ -24,6 +24,6 @@ export default (router, { User }) => {
     })
     .delete('session', '/session', async (ctx) => {
       ctx.session = {};
-      ctx.redirect('/');
+      ctx.redirect(router.url('root'));
     });
 };

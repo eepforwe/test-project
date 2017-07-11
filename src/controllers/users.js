@@ -6,8 +6,8 @@ export default (router, { User }) => {
       const users = await User.findAll();
       ctx.render('users', { users });
     })
-    .get('reg form', '/users/new', (ctx) => {
-      const user = User.build();
+    .get('reg form', '/users/new', async (ctx) => {
+      const user = await User.build();
       ctx.render('users/new', { f: buildFormObj(user) });
     })
     .post('new user', '/users/new', async (ctx) => {
@@ -16,11 +16,17 @@ export default (router, { User }) => {
       try {
         await user.save();
         ctx.flash.set('User has been created successfully');
-        ctx.redirect(router.url('root'));
+        ctx.redirect(router.url('newSession'));
       } catch (e) {
         ctx.render('/users/new', { f: buildFormObj(user, e) });
       }
-    }).delete('delete user', '/users/:id', (ctx) => {
+    })
+    .get('profile', '/users/:id', async (ctx) => {
+      const id = Number(ctx.params.id);
+      const user = User.findById(id);
+      ctx.render('/user/profile', { user });
+    })
+    .delete('delete user', '/users/:id', (ctx) => {
       const userId = Number(ctx.params.id);
       User.destroy({
         where: {

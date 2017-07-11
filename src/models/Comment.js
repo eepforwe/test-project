@@ -1,14 +1,12 @@
 import Sequelize from 'sequelize';
 
-export default connect => connect.define('Tag', {
-  name: {
+export default connect => connect.define('Comment', {
+  content: {
     type: Sequelize.STRING,
-    unique: true,
     validate: {
       notEmpty: true,
     },
   },
 }, {
   freezeTableName: true,
-  timestamps: false,
 });

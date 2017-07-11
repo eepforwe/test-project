@@ -20,7 +20,11 @@ export default () => {
   const app = new Koa();
   const router = new Router();
 
-  app.use(methodOverride());
+  app.use(methodOverride((req) => {
+    if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+      return req.body._method;
+    }
+  }));
 
   app.use(bodyParser());
   app.use(koaLogger());

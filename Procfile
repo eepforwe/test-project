@@ -1,1 +1,1 @@
-web: yarn start
+web: npm dist/bin/index.js

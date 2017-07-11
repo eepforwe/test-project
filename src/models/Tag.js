@@ -2,7 +2,7 @@ import Sequelize from 'sequelize';
 
 export default connect => connect.define('Tag', {
   name: {
-    type: Sequelize.String,
+    type: Sequelize.STRING,
     validate: {
       notEmpty: true,
       unique: true,

@@ -2,17 +2,15 @@ extends /layouts/application.pug
 
 block content
     .row.justify-content-center.mt-4
-        form(method='GET', action='/tasks/new')
+        form(method='GET', action=urlFor('new task'))
             button(type='submit' class='btn btn-success btn-lg')
                 i.fa.fa-ticket(aria-hidden='true') New Task
 
-    form.form-inline.justify-content-center.mt-4(action='/tasks')
-        .form-group
-            label.mr-2 Category:
-            select(name='category' class='form-control' value='category')
-                option All
-                option(value='creatorId') Created
-                option(value='assignedToId') Assigned to
+
+
+    form.form-inline.justify-content-center.mt-4(action=urlFor('tasks'))
+        button(type='submit' class='btn btn-warning' name='creatorId' value=signedId())
+            i.fa.fa-ticket(aria-hidden='true') My tasks
 
         .form-group.ml-4
             label.mr-2 Status:
@@ -20,6 +18,13 @@ block content
                 option All
                 each status in statuses
                     option(value= status.id)= status.name
+
+        .form-group.ml-4
+            label.mr-2 Assigned to:
+            select(name='assignedToId' class='form-control')
+                option All
+                each user in users
+                    option(value= user.id)= user.fullName
 
         //- .form-group.ml-4
         //-   label.mr-2 Tags:
@@ -50,13 +55,13 @@ block content
                         tr
                             td.text-center= task.id
                             td.text-center
-                                a(href=`/tasks/${task.id}`)= task.name
+                                a(href=urlFor('task', { id: task.id }))= task.name
                             td.text-center= task.status
                             td.text-center= task.assignedTo
                             td.text-center= task.creator
                             td.align-items-center
                                 if task.creatorId == signedId()
-                                    form(method='POST', action=`/tasks/${task.id}`)
+                                    form(method='POST', action=urlFor('patch task', { id: task.id }))
                                         input(type='hidden', name='_method', value='DELETE')
                                         button(type='submit' class='btn btn-danger')
                                             i.fa.fa-trash-o(aria-hidden='true')

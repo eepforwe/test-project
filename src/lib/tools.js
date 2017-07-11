@@ -23,19 +23,18 @@ export const getData = async (task) => {
   return data;
 };
 
-export const getParams = (query, ctx) => {
+export const getParams = (query) => {
   const params = {};
-
-  if (query.category && query.category !== 'All') {
-    params[query.category] = Number(ctx.session.userId);
+  if (query.assignedToId && query.assignedToId !== 'All') {
+    params.assignedToId = Number(query.assignedToId);
   }
 
   if (query.status && query.status !== 'All') {
     params.StatusId = Number(query.status);
   }
 
-  if (query.tag && query.tag !== 'All') {
-    params.TagId = Number(query.tag);
+  if (query.creatorId) {
+    params.creatorId = Number(query.creatorId);
   }
 
   return params;

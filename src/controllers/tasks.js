@@ -12,12 +12,13 @@ export default (router, { User, Task, Status, Tag }) => {
     })
     .get('tasks', '/tasks', async (ctx) => {
       const { query } = url.parse(ctx.request.url, true);
-      const where = getParams(query, ctx);
+      const where = getParams(query);
       const filteredTasks = await Task.findAll({ where });
       const tasks = await Promise.all(filteredTasks.map(async task => getData(task)));
       const tags = await Tag.findAll();
       const statuses = await Status.findAll();
-      ctx.render('tasks/index', { tasks, statuses, tags });
+      const users = await User.findAll();
+      ctx.render('tasks/index', { users, tasks, statuses, tags });
     })
     .get('task', '/tasks/:id', async (ctx) => {
       const taskId = Number(ctx.params.id);
@@ -49,7 +50,7 @@ export default (router, { User, Task, Status, Tag }) => {
         ctx.render('tasks/new', { f: buildFormObj(task, e), users });
       }
     })
-    .patch('task', '/tasks/:id', async (ctx) => {
+    .patch('patch task', '/tasks/:id', async (ctx) => {
       const { statusId, taskId } = ctx.request.body;
       const task = await Task.findById(Number(taskId));
       task.setStatus(Number(statusId));

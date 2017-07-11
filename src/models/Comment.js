@@ -8,5 +8,5 @@ export default connect => connect.define('Comment', {
     },
   },
 }, {
-  tableName: 'Comment',
+  freezeTableName: true,
 });

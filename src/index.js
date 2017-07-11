@@ -57,6 +57,13 @@ export default () => {
   app.use(router.allowedMethods());
   app.use(router.routes());
 
+  app.use(async (ctx) => {
+    if (ctx.status !== 404) {
+      return;
+    }
+    ctx.redirect('/404');
+  });
+
   app.use(middleware({
     config: getWebpackConfig(),
   }));

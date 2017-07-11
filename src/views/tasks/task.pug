@@ -19,8 +19,8 @@ block content
                     td.text-center= task.status
                 tr
                     th
-                        | Creator
-                    td.text-center= task.creator
+                        | Creator(id)
+                    td.text-center= `${task.creator}(${task.creatorId})`
                 tr
                     th
                         | Assigned To
@@ -33,11 +33,11 @@ block content
                     th
                         | Tags
                     td.text-center
-                        form.form-inline(action='/tasks')
+                        form.form-inline(action=urlFor('tasks'))
                             each tag in tags
-                                a.mr-2(href=`/tags/${tag.id}`)= tag.name
+                                a.mr-2(href=urlFor('tag', { id: tag.id }))= tag.name
 
-        form.form-inline.mx-auto.justify-content-center(action=`/tasks/${task.id}`, method='post')
+        form.form-inline.mx-auto.justify-content-center(action=urlFor('patch task', { id: task.id }), method='post')
             - const value = f.object[property] === undefined ? '' : f.object[property]
             .form-group(class=(f.errors[property] && 'has-danger'))
                 select(name='statusId' class='form-control' value=`${value}`)
@@ -48,7 +48,7 @@ block content
                 button(class='btn btn-primary') Change status
 
     div.col-lg-8.justify-content-start.offset-md-2
-        form(action=`/tasks/${task.id}/comments/new` method='post' )
+        form(action=urlFor(`new comment`, { id: task.id }) method='post' )
             label(for='Comment') Comment
             +textarea(f, 'content')
 

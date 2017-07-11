@@ -8,6 +8,6 @@ export default connect => connect.define('Status', {
     },
   },
 }, {
-  tableName: 'Status',
+  freezeTableName: true,
   timestamps: false,
 });

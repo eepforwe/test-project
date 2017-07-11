@@ -44,6 +44,6 @@ export default connect => connect.define('Task', {
       notEmpty: true,
     },
   },
-  tableName: 'Task',
+  freezeTableName: true,
   timestamps: false,
 });

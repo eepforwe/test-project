@@ -23,7 +23,7 @@ export default (router, { User }) => {
         return;
       }
       ctx.flash.set('email or password were wrong');
-      ctx.redirect('session/new', { f: buildFormObj({ email }) });
+      ctx.render('session/new', { f: buildFormObj({ email }) });
     })
     .delete('session', '/session', async (ctx) => {
       ctx.session = {};

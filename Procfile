@@ -1,1 +1,0 @@
-web: npm dist/bin/index.js

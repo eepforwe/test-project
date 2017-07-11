@@ -2,30 +2,59 @@ extends ../layouts/application.pug
 
 block content
     if isSignedIn()
-        a.btn.btn-outline-success(href="/tasks/new") New Task
+        .row.justify-content-center.mt-4
+            form(method='GET', action='/tasks/new')
+                button(type='submit' class='btn btn-success btn-lg')
+                    i.fa.fa-ticket(aria-hidden='true') New Task
+
+        form.form-inline.justify-content-center.mt-4(action='/tasks')
+            .form-group
+                label.mr-2 Category:
+                select(name='category' class='form-control' value='category')
+                    option All
+                    option(value='creatorId') Created
+                    option(value='assignedToId') Assigned to
+
+            .form-group.ml-4
+                label.mr-2 Status:
+                select(name='status' class='form-control' value='status')
+                    option All
+                    each status in statuses
+                        option(value= status.id)= status.name
+
+            .form-group.ml-4
+                button(class='btn btn-primary' type='submit')
+                    i.mr-1.fa.fa-search
+                    | Search
 
         .row.justify-content-center.mt-4
             .col-lg-4
                 table.table.table-stripped
-                    h2.text-center Tasks
+                    h2.text-center.mt-4 Tasks
                         tr
-                            th ID
-                            th Name
-                            th Status
-                            th AssignedTo
-                            th Tags
-                            th Creator
-                            th Description
+                            th.text-center ID
+                            th.text-center Name
+                            th.text-center Status
+                            th.text-center AssignedTo
+                            th.text-center Created by
+                            th.text-center Delete
+
                     tbody
                         each task in tasks
                             tr
-                                td= task.id
-                                td= task.name
-                                td= task.status
-                                td= task.assignedTo
-                                td= task.tags
-                                td= task.creator
-                                td= task.description
-                                td
-                                    a.btn.btn-danger(href=`/task/${task.id}`, aria-label='Delete')
-                                        i.fa.fa-trash-o(aria-hidden='true')
+                                td.text-center= task.id
+                                td.text-center
+                                    a(href=`/tasks/${task.id}`)= task.name
+                                td.text-center= task.status
+                                td.text-center= task.assignedTo
+                                td.text-center= task.creator
+                                //- td.align-items-center
+                                //-   form(method='POST', action=`/tasks/${task.id}`)
+                                //-     input(type='hidden', name='_method', value='PATCH')
+                                //-     button(type='submit' class='btn btn-primary' aria-hidden='true')
+                                //-       i.fa.fa-cog(aria-hidden='true')
+                                td.align-items-center
+                                    form(method='POST', action=`/tasks/${task.id}`)
+                                        input(type='hidden', name='_method', value='DELETE')
+                                        button(type='submit' class='btn btn-danger')
+                                            i.fa.fa-trash-o(aria-hidden='true')

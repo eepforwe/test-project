@@ -1,4 +1,4 @@
-extends ../layouts/application.pug
+extends /layouts/application.pug
 
 block content
     h3.text-center.mt-3 Registration
@@ -8,4 +8,29 @@ block content
             +input(f, 'password', 'fa fa-key fa-fw', { as: 'password' })
             +input(f, 'firstName','fa fa-address-book-o fa-fw' )
             +input(f, 'lastName', 'fa fa-address-book-o fa-fw')
-            +button(f, 'Sign up')
+            +button('Sign up')
+    //- .mt-3.form-group.col-lg-3.mx-auto
+    //-   form(action='/users/new' method='post')
+    //-
+    //-     .input-group.margin-bottom-sm
+    //-       span.input-group-addon
+    //-         i.fa.fa-envelope-o.fa-fw(aria-hidden='true')
+    //-       input.form-control(name='form[email]' value=`${f.object['property]}` placeholder='Email address')
+    //-
+    //-     .input-group
+    //-       span.input-group-addon
+    //-         i.fa.fa-key.fa-fw(aria-hidden='true')
+    //-       input.form-control(type='password', placeholder='Password')
+    //-
+    //-     .input-group.margin-bottom-sm
+    //-       span.input-group-addon
+    //-         i.fa.fa-address-book-o.fa-fw(aria-hidden='true')
+    //-       input.form-control(type='text', placeholder='FirstName')
+    //-
+    //-     .input-group
+    //-       span.input-group-addon
+    //-         i.fa.fa-address-book-o.fa-fw(aria-hidden='true')
+    //-       input.form-control(type='password', placeholder='LastName')
+    //-
+    //-     .form-group.mt-3
+    //-       input(class='btn btn-outline-success btn-block' type='submit' value='Sign up')

@@ -1,0 +1,54 @@
+extends ../layouts/application.pug
+
+block content
+    h3.text-center.mt-3 Card
+    .mt-3.form-group.col-lg-4.mx-auto
+        table.table.table-stripped
+            tbody
+                tr
+                    th
+                        | ID
+                    td= task.id
+                tr
+                    th
+                        | Name
+                    td= task.name
+                tr
+                    th
+                        | Status
+                    td= task.status
+                tr
+                    th
+                        | Creator
+                    td= task.creator
+                tr
+                    th
+                        | Assigned To
+                    td= task.assignedTo
+                tr
+                    th
+                        | Description
+                    td= task.description
+                tr
+                    th
+                        | Tags
+                    td
+                        form.form-inline(action='/tasks')
+                            each tag in tags
+                                a(value='tagId') tag.name
+
+        form.form-inline.mx-auto.justify-content-center(action=`/tasks/${task.id}`, method='post')
+            - const value = f.object[property] === undefined ? '' : f.object[property]
+            .form-group(class=(f.errors[property] && 'has-danger'))
+                select(name='statusId' class='form-control' value=`${value}`)
+                    each status in statuses
+                        option(value= status.id)= status.name
+                input(type='hidden' name='_method' value='PATCH')
+                input(type='hidden' name='taskId' value= task.id)
+                button(class='btn btn-primary') Change status
+        //- form.mt-3(action='/tasks/:id' method='post')
+          +button('Save')
+        
+        
+    
+      

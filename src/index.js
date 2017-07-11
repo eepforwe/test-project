@@ -63,7 +63,7 @@ export default () => {
     ],
   });
   pug.use(app);
-  // app.use(rollbar.errorHandler(process.env.ROLLBAR_TOKEN));
+  app.use(rollbar.errorHandler(process.env.ROLLBAR_TOKEN));
 
   return app;
 };

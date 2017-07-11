@@ -1,12 +1,12 @@
 extends ../layouts/application.pug
 
 block content
-    if isSignedIn()
-        form.mt-3(action='/tasks/new' method='post')
-            h2.text-center Create new task
-            +input(f, 'Name')
-            +select(f, 'assignedTo', users)
-            +input(f, 'Tags')
-            +fieldset(f, `${user.fullName}`)
-            +textarea(f, 'Description')
-            +button(f, 'Create')
+    h3.text-center.mt-3 Create new task
+    .mt-3.form-group.col-lg-4.mx-auto
+        form(action='/tasks/new' method='post')
+            +input(f, 'name', 'fa fa-ticket fa-fw')
+            +select(f, 'assignedToId','fa fa-user-circle-o fa-fw', users)
+            +input(f, 'Tags', 'fa fa-tags fa-fw')
+            +textarea(f, 'description')
+            +button('Create')
+

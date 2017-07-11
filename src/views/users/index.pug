@@ -7,12 +7,14 @@ block content
                 table.table.table-stripped
                     h2.text-center Users
                         tr
-                            th Full Name
-                            th Email
-                            th Created At
+                            th.text-center ID
+                            th.text-center Full Name
+                            th.text-center Email
+                            th.text-center Created At
                     tbody
                         each user in users
                             tr
+                                td.text-center= user.id
                                 td= user.fullName || '-'
-                                td= user.email
+                                td.text-center= user.email
                                 td= user.createdAt

@@ -6,51 +6,56 @@ export default connect => connect.define('User', {
     type: Sequelize.STRING,
     unique: {
       args: true,
-      msg: 'Email address already in use!',
+      msg: 'Oops. Looks like account with this email address already use',
     },
     validate: {
       isEmail: {
         args: true,
-        msg: 'Not email format',
+        msg: 'The email you entered is invalid.',
       },
-      notNull: true,
       notEmpty: {
         args: true,
-        msg: 'Plz enter email',
+        msg: 'Please enter the email',
       },
     },
   },
+
   password_hash: {
     type: Sequelize.STRING,
     validate: {
-      notNull: true,
       notEmpty: true,
     },
   },
-  firstName: {
-    notNull: true,
-    type: Sequelize.STRING,
-    field: 'first_name',
-  },
-  lastName: {
-    notNull: true,
-    type: Sequelize.STRING,
-    field: 'last_name',
-  },
+
   password: {
     type: Sequelize.VIRTUAL,
     set: function set(value) {
       this.setDataValue('password_hash', encrypt(value));
       this.setDataValue('password', value);
+      return value;
     },
     validate: {
-      notNull: true,
       len: {
-        args: [6, 18],
-        msg: 'password length must be 6-18 symbols',
+        args: [4, 18],
+        msg: 'password length must be 4 - 18 symbols',
       },
     },
   },
+
+  firstName: {
+    type: Sequelize.STRING,
+    field: 'first_name',
+  },
+
+  lastName: {
+    type: Sequelize.STRING,
+    field: 'last_name',
+  },
 }, {
+  getterMethods: {
+    fullName: function fullName() {
+      return `${this.firstName} ${this.lastName}`;
+    },
+  },
   freezeTableName: true,
 });

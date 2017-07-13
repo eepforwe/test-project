@@ -17,8 +17,9 @@ gulp.task('init', async () => {
 gulp.task('console', () => {
   gutil.log = gutil.noop;
   const replServer = repl.start({
-    prompt: 'Application console >',
+    prompt: 'Application console > ',
   });
+
   Object.keys(container).forEach((key) => {
     replServer.context[key] = container[key];
   });
